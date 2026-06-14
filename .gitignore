@@ -1,0 +1,65 @@
+# =========================
+
+# Unity
+
+# =========================
+
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+UserSettings/
+MemoryCaptures/
+
+# =========================
+
+# Visual Studio / VS Code
+
+# =========================
+
+.vs/
+.vscode/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+
+# =========================
+
+# Unity cache
+
+# =========================
+
+*.apk
+*.aab
+*.unitypackage
+*.app
+*.exe
+
+# =========================
+
+# Sistema operacional
+
+# =========================
+
+.DS_Store
+Thumbs.db
+
+# =========================
+
+# Pastas pessoais / backup
+
+# =========================
+
+OLD/
+BACKUP/
+Backup/
