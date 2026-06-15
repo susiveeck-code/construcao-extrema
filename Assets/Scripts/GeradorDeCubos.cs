@@ -6,8 +6,10 @@ public class GeradorDeCubos : MonoBehaviour
     [SerializeField] private GameObject cuboPrefab;
     private GameObject ultimoCuboGerado; 
     private AlturaDaConstrucao alturaDaConstrucao;
+    private Transform myCamera;
     void Start()
-    {        
+    {
+        myCamera = Camera.main.transform;
         alturaDaConstrucao = GetComponent<AlturaDaConstrucao>();
         GerarCubo();
     }
@@ -15,11 +17,15 @@ public class GeradorDeCubos : MonoBehaviour
     {
         if (ultimoCuboGerado == null) { return; }
 
-        // Criado vetor de 2 dimensoes com as setas Horizontal, vertical e as teclas WSAD
-        Vector2 entradasJogador = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        // Criado vetor com as setas Horizontal, vertical e as teclas WSAD
+        Vector3 entradasJogador = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+
+        // Faz o movimento seguir a direção para onde a câmera está olhando        
+        Vector3 direcaoCamera = myCamera.TransformDirection(entradasJogador);
+        direcaoCamera.y = 0;
 
         // Acessando a propriedade de posicao do Cubo instanciado e incrementando ela com este novo vetor 
-        ultimoCuboGerado.transform.position += new Vector3(entradasJogador.x, 0, entradasJogador.y) * Time.deltaTime * 3;
+        ultimoCuboGerado.transform.position += direcaoCamera.normalized * Time.deltaTime * 3;
 
         // Se jogador clicou na barra de espaco, o cubo é solto
         if (Input.GetKeyDown(KeyCode.Space))
