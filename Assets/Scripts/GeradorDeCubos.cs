@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GeradorDeCubos : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class GeradorDeCubos : MonoBehaviour
     private GameObject ultimoCuboGerado; 
     private AlturaDaConstrucao alturaDaConstrucao;
     private Transform myCamera;
+    [SerializeField] private UnityEvent OnSoltarCubo;
     void Start()
     {
         myCamera = Camera.main.transform;
@@ -76,7 +78,13 @@ public class GeradorDeCubos : MonoBehaviour
         // Ativa gravidade do Cubo
         ultimoCuboGerado.GetComponent<Rigidbody>().useGravity = true;
 
+        // Pega o primeiro filho desse objeto (no caso, a linha brilhosa) e o desativa quando soltar o cubo
+        ultimoCuboGerado.transform.GetChild(0).gameObject.SetActive(false);
+
         // Torna a instancia do cubo nula para que o jogador nao a mova mais
         ultimoCuboGerado = null;
+
+        // Toca um som ao soltar o cubo
+        OnSoltarCubo.Invoke();
     }
 }
