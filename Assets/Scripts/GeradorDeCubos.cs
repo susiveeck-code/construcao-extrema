@@ -21,25 +21,14 @@ public class GeradorDeCubos : MonoBehaviour
     void Update()
     {
         if (ultimoCuboGerado == null) { return; }
-
-        // Criado vetor com as setas Horizontal, vertical e as teclas WSAD
-        //Vector3 entradasJogador = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-
+        
         // Faz o movimento seguir a direção para onde a câmera está olhando        
         Vector3 direcaoCamera = myCamera.TransformDirection(entradasJogador);
         direcaoCamera.y = 0;
 
         // Acessando a propriedade de posicao do Cubo instanciado e incrementando ela com este novo vetor 
         ultimoCuboGerado.transform.position += direcaoCamera.normalized * Time.deltaTime * 3;
-
-        // Se jogador clicou na barra de espaco, o cubo é solto
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    SoltarCubo();
-
-        //    // Invoca o método GerarCubo depois de 3 segundos
-        //    Invoke(nameof(GerarCubo), 3);
-        //}
+       
     }
     private void GerarCubo()
     {
@@ -76,24 +65,30 @@ public class GeradorDeCubos : MonoBehaviour
 
     }
 
+   
     public void SoltarCubo()
     {
-        // Ativa gravidade do Cubo
-        ultimoCuboGerado.GetComponent<Rigidbody>().useGravity = true;
+        if (ultimoCuboGerado == null)
+            return;
 
-        // Pega o primeiro filho desse objeto (no caso, a linha brilhosa) e o desativa quando soltar o cubo
-        ultimoCuboGerado.transform.GetChild(0).gameObject.SetActive(false);
-
-        // Torna a instancia do cubo nula para que o jogador nao a mova mais
+        GameObject cuboQueFoiSolto = ultimoCuboGerado;
         ultimoCuboGerado = null;
 
-        // Toca um som ao soltar o cubo
-        OnSoltarCubo.Invoke();
+        Rigidbody rigidbodyCubo = cuboQueFoiSolto.GetComponent<Rigidbody>();
 
-        // Invoca o método GerarCubo depois de 3 segundos
+        if (rigidbodyCubo != null)
+        {
+            rigidbodyCubo.useGravity = true;
+        }
+
+        if (cuboQueFoiSolto.transform.childCount > 0)
+        {
+            cuboQueFoiSolto.transform.GetChild(0).gameObject.SetActive(false);
+        }
+
+        OnSoltarCubo.Invoke();
         Invoke(nameof(GerarCubo), 3);
     }
-
     public void MoverCubo(InputAction.CallbackContext value)
     {
         Vector2 input = value.ReadValue<Vector2>();
@@ -108,4 +103,5 @@ public class GeradorDeCubos : MonoBehaviour
             SoltarCubo();
         }
     }
+
 }

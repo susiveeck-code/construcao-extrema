@@ -1,226 +1,137 @@
-﻿//using System;
-//using System.Threading.Tasks;
-//using Unity.Services.Authentication;
-//using Unity.Services.Core;
-//using UnityEngine;
-//using Unity.Services.Leaderboards;
-//using Unity.Services.Leaderboards.Models;
-//using System.Collections.Generic;
-
-
-
-///*
-//    Jogo inicia
-//      │
-//      ▼
-//    Inicializa os serviços da Unity
-//      │
-//      ▼
-//    Conecta o jogador na nuvem
-//      │
-//      ▼
-//    Se der certo:
-//        mostra o PlayerID
-//    Se der erro:
-//        abre um popup
-//*/
-
-//public class CloudServices : MonoBehaviour
-//{
-//    [SerializeField] private GameObject erroLoginPopup;
-
-
-//    public async Task SignInAnonymouslyAsync()
-//    {
-//        // O jogador já está logado?
-//        if (AuthenticationService.Instance.IsSignedIn) return;
-
-//        try
-//        {
-//            // Aqui acontece realmente o login. A Unity cria um jogador automaticamente
-//            await AuthenticationService.Instance.SignInAnonymouslyAsync();
-//            if ((AuthenticationService.Instance.PlayerName == "") || (AuthenticationService.Instance.PlayerName == null)) 
-//            {
-//                await AtualizarUserName("Player");
-//                Debug.Log(AuthenticationService.Instance.PlayerName);
-//            }
-
-//            Debug.Log("Sign in anonymously succeeded!");
-
-//            // A Unity cria um identificador único. Esse ID identifica somente aquele jogador
-//            Debug.Log($"PlayerID: {AuthenticationService.Instance.PlayerId}");
-
-//        }
-
-//        catch (AuthenticationException ex)
-//        {
-//            Debug.LogException(ex);
-//            erroLoginPopup.SetActive(true);
-//        }
-//        catch (RequestFailedException ex)
-//        {
-//            Debug.LogException(ex);
-//            erroLoginPopup.SetActive(true);
-//        }
-//    }
-
-//    public async void TentarLoginNovamente()
-//    {
-//        erroLoginPopup.SetActive(false);
-
-//        try
-//        {
-//            if (UnityServices.State != ServicesInitializationState.Initialized)
-//            {
-//                await UnityServices.InitializeAsync();
-//            }
-
-//            await SignInAnonymouslyAsync();
-//        }
-//        catch (Exception e)
-//        {
-//            Debug.LogException(e);
-//            erroLoginPopup.SetActive(true);
-//        }
-//    }
-
-//    public async Task AtualizarUserName(string username)
-//    {
-//        await AuthenticationService.Instance.UpdatePlayerNameAsync(username);
-//    }
-
-//    public string GetUserName()
-//    {
-//        return AuthenticationService.Instance.PlayerName;
-//    }
-
-//    public async Task SalvarPontuacao(int pontuacao)
-//    {
-//        await LeaderboardsService.Instance.AddPlayerScoreAsync("pontuacoes", pontuacao);
-//    }
-
-//    public async Task<List<JogadorRanking>> GetPontuacoes()
-//    {
-//        var scoresResponse = await LeaderboardsService.Instance.GetScoresAsync("pontuacoes");
-
-//        List<JogadorRanking> jogadoresRanking = new List<JogadorRanking>();
-
-//        foreach (LeaderboardEntry entry in scoresResponse.Results)
-//        { 
-//            JogadorRanking jogador = new JogadorRanking();
-//            jogador.posicao = entry.Rank;
-//            jogador.username = entry.PlayerName;
-//            jogador.pontuacao = (int) entry.Score;
-
-//            jogadoresRanking.Add(jogador);
-//        }
-//        return jogadoresRanking;       
-//    }
-
-//    public async Task<int> GetPontuacaoJogador()
-//    {
-//        try
-//        {
-//            var result = await LeaderboardsService.Instance.GetPlayerScoreAsync("pontuacoes");
-//            return (int)result.Score;
-//        }
-//        catch
-//        {
-//            return 0;
-//        }
-
-//    }
-//}
-
+﻿
 using System;
 using System.Threading.Tasks;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
+using Unity.Services.Core.Environments;
 using UnityEngine;
 using Unity.Services.Leaderboards;
 using Unity.Services.Leaderboards.Models;
 using System.Collections.Generic;
 
+/*
+    Jogo inicia
+      │
+      ▼
+    Inicializa os serviços da Unity
+      │
+      ▼
+    Conecta o jogador na nuvem
+      │
+      ▼
+    Se der certo:
+        mostra o PlayerID
+    Se der erro:
+        abre um popup
+*/
+
+
 public class CloudServices : MonoBehaviour
 {
     [SerializeField] private GameObject erroLoginPopup;
+    public static CloudServices Instance { get; private set; }
 
     private const string LeaderboardId = "pontuacoes";
 
-    private async void Start()
-    {
-        await SignInAnonymouslyAsync();
-    }
+    private Task tarefaInicializacao;
+    private bool servicosProntos = false;
 
-    private async Task InicializarUnityServices()
+    private void Awake()
     {
-        if (UnityServices.State != ServicesInitializationState.Initialized)
+        if (Instance != null && Instance != this)
         {
-            await UnityServices.InitializeAsync();
-            Debug.Log("Unity Services inicializado com sucesso.");
-        }
-    }
-    private async void Awake()
-    {
-        await UnityServices.InitializeAsync();
-        Debug.Log("AWAKE - Unity Services inicializado");
-    }
-    public async Task SignInAnonymouslyAsync()
-    {
-        await InicializarUnityServices();
-
-        if (AuthenticationService.Instance.IsSignedIn)
+            Destroy(gameObject);
             return;
+        }
 
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+
+        tarefaInicializacao = InicializarELogar();
+    }
+
+    private async Task InicializarELogar()
+    {
         try
         {
-            await AuthenticationService.Instance.SignInAnonymouslyAsync();
+            if (UnityServices.State != ServicesInitializationState.Initialized)
+            {                
+                var options = new InitializationOptions();
+                options.SetEnvironmentName("production");
+
+                await UnityServices.InitializeAsync(options);
+
+                Debug.Log("Unity Services inicializado com sucesso.");
+            }
+
+            if (!AuthenticationService.Instance.IsSignedIn)
+            {
+                await AuthenticationService.Instance.SignInAnonymouslyAsync();
+
+                Debug.Log("Sign in anonymously succeeded!");
+                Debug.Log($"PlayerID: {AuthenticationService.Instance.PlayerId}");
+            }
 
             if (string.IsNullOrEmpty(AuthenticationService.Instance.PlayerName))
             {
-                await AtualizarUserName("Player");
+                await AuthenticationService.Instance.UpdatePlayerNameAsync("Player");
             }
 
-            Debug.Log("Sign in anonymously succeeded!");
-            Debug.Log($"PlayerID: {AuthenticationService.Instance.PlayerId}");
             Debug.Log($"PlayerName: {AuthenticationService.Instance.PlayerName}");
+
+            servicosProntos = true;
+            Debug.Log("CloudServices pronto para usar Leaderboards.");
         }
-        catch (AuthenticationException ex)
+        catch (Exception ex)
         {
             Debug.LogException(ex);
-            erroLoginPopup.SetActive(true);
+
+            if (erroLoginPopup != null)
+                erroLoginPopup.SetActive(true);
         }
-        catch (RequestFailedException ex)
+    }
+
+    private async Task GarantirPronto()
+    {
+        if (tarefaInicializacao != null)
         {
-            Debug.LogException(ex);
-            erroLoginPopup.SetActive(true);
+            await tarefaInicializacao;
         }
+
+        if (UnityServices.State != ServicesInitializationState.Initialized)
+        {
+            await UnityServices.InitializeAsync();
+        }
+
+        if (!AuthenticationService.Instance.IsSignedIn)
+        {
+            await AuthenticationService.Instance.SignInAnonymouslyAsync();
+        }
+
+        while (!servicosProntos)
+        {
+            await Task.Delay(100);
+        }
+
+    }
+
+    public async Task SignInAnonymouslyAsync()
+    {
+        await GarantirPronto();
     }
 
     public async void TentarLoginNovamente()
     {
-        erroLoginPopup.SetActive(false);
+        if (erroLoginPopup != null)
+            erroLoginPopup.SetActive(false);
 
-        try
-        {
-            await SignInAnonymouslyAsync();
-        }
-        catch (Exception e)
-        {
-            Debug.LogException(e);
-            erroLoginPopup.SetActive(true);
-        }
+        tarefaInicializacao = InicializarELogar();
+        await tarefaInicializacao;
     }
 
     public async Task AtualizarUserName(string username)
     {
-        await InicializarUnityServices();
-
-        if (!AuthenticationService.Instance.IsSignedIn)
-        {
-            await SignInAnonymouslyAsync();
-        }
-
+        await GarantirPronto();
         await AuthenticationService.Instance.UpdatePlayerNameAsync(username);
     }
 
@@ -234,16 +145,26 @@ public class CloudServices : MonoBehaviour
 
     public async Task SalvarPontuacao(int pontuacao)
     {
-        await SignInAnonymouslyAsync();
+       
+        await GarantirPronto();
+
+        Debug.Log("Vou tentar salvar no Leaderboard agora...");
 
         await LeaderboardsService.Instance.AddPlayerScoreAsync(LeaderboardId, pontuacao);
 
         Debug.Log($"Pontuação enviada para o Leaderboard: {pontuacao}");
+
     }
 
     public async Task<List<JogadorRanking>> GetPontuacoes()
     {
-        await SignInAnonymouslyAsync();
+        await GarantirPronto();
+
+
+        Debug.Log($"Unity State: {UnityServices.State}");
+        Debug.Log($"Signed In: {AuthenticationService.Instance.IsSignedIn}");
+
+
 
         var scoresResponse = await LeaderboardsService.Instance.GetScoresAsync(LeaderboardId);
 
@@ -264,7 +185,7 @@ public class CloudServices : MonoBehaviour
 
     public async Task<int> GetPontuacaoJogador()
     {
-        await SignInAnonymouslyAsync();
+        await GarantirPronto();
 
         try
         {

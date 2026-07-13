@@ -1444,6 +1444,7 @@ GameObject:
   - component: {fileID: 519192232}
   - component: {fileID: 519192231}
   - component: {fileID: 519192230}
+  - component: {fileID: 519192233}
   m_Layer: 5
   m_Name: PlayButton
   m_TagString: Untagged
@@ -1515,9 +1516,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1676819221}
-        m_TargetAssemblyTypeName: ControladorMenu, Assembly-CSharp
-        m_MethodName: Jogar
+      - m_Target: {fileID: 519192233}
+        m_TargetAssemblyTypeName: BotaoInterstitial, Assembly-CSharp
+        m_MethodName: MostrarAnuncio
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1530,6 +1531,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1480268854}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
         m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1676819221}
+        m_TargetAssemblyTypeName: ControladorMenu, Assembly-CSharp
+        m_MethodName: Jogar
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1577,6 +1590,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519192228}
   m_CullTransparentMesh: 1
+--- !u!114 &519192233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519192228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cdc70501d7bcba44b0083b49375a0e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BotaoInterstitial
 --- !u!1 &548116379 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1507636620937791836, guid: 7097ba7ba649e1f41bba232312bdcbd8, type: 3}
@@ -2571,7 +2596,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &942808069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2967,6 +2992,7 @@ GameObject:
   - component: {fileID: 1126178225}
   - component: {fileID: 1126178224}
   - component: {fileID: 1126178223}
+  - component: {fileID: 1126178226}
   m_Layer: 5
   m_Name: HomeButton
   m_TagString: Untagged
@@ -3038,6 +3064,30 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1126178226}
+        m_TargetAssemblyTypeName: BotaoInterstitial, Assembly-CSharp
+        m_MethodName: MostrarAnuncio
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1480268854}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1676819221}
         m_TargetAssemblyTypeName: ControladorMenu, Assembly-CSharp
         m_MethodName: VoltarHome
@@ -3088,6 +3138,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1126178221}
   m_CullTransparentMesh: 1
+--- !u!114 &1126178226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1126178221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cdc70501d7bcba44b0083b49375a0e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BotaoInterstitial
 --- !u!1 &1150188610
 GameObject:
   m_ObjectHideFlags: 0
@@ -4236,6 +4298,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d2cb20123de2eb4f8ad55d9c47ce07a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ControladorMenu
+  botoesMenu: {fileID: 0}
+  loadingText: {fileID: 0}
 --- !u!4 &1676819222
 Transform:
   m_ObjectHideFlags: 0
@@ -5298,18 +5362,6 @@ MonoBehaviour:
   OnSoltarCubo:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2045418232}
-        m_TargetAssemblyTypeName: GerenciadorDePontuacao, Assembly-CSharp
-        m_MethodName: AdicionarPontuacao
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 397405073}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
         m_MethodName: Play
@@ -5363,7 +5415,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GerenciadorDePontuacao
   pontuacaoText: {fileID: 55454871}
   pontuacaoGameOverText: {fileID: 1812093973}
-  cloudServices: {fileID: 942808069}
 --- !u!114 &2045418233
 MonoBehaviour:
   m_ObjectHideFlags: 0
