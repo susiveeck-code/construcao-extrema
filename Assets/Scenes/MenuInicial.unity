@@ -2521,6 +2521,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InterstitialAd
   appKey: 272be575d
   interstitialAdUnitId: a03fp759fzeag6ke
+  removedorDeAnuncios: {fileID: 1697093056}
 --- !u!1 &1177806356
 GameObject:
   m_ObjectHideFlags: 0
@@ -3900,6 +3901,65 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &1697093055
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1697093057}
+  - component: {fileID: 1697093056}
+  m_Layer: 0
+  m_Name: CloudSave
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1697093056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1697093055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69901549db731d74d815a7ddf41ddd93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RemovedorDeAnuncios
+  OnRemoverAnuncios:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1925460423}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!4 &1697093057
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1697093055}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1716054935
 GameObject:
   m_ObjectHideFlags: 0
@@ -4008,6 +4068,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ControladorMenu
   botoesMenu: {fileID: 321282974}
   loadingText: {fileID: 123105273}
+  interstitialAd: {fileID: 1141168992}
 --- !u!4 &1733848667
 Transform:
   m_ObjectHideFlags: 0
@@ -4039,6 +4100,7 @@ MonoBehaviour:
   usernameInputField: {fileID: 2017935586}
   erroLoginPopup: {fileID: 402190418}
   recordeText: {fileID: 1062214623}
+  removedorDeAnuncios: {fileID: 1697093056}
 --- !u!114 &1733848669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4847,6 +4909,7 @@ GameObject:
   - component: {fileID: 1925460427}
   - component: {fileID: 1925460426}
   - component: {fileID: 1925460425}
+  - component: {fileID: 1925460428}
   m_Layer: 5
   m_Name: RemoverAnuncioButton
   m_TagString: Untagged
@@ -4956,6 +5019,76 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1925460423}
   m_CullTransparentMesh: 1
+--- !u!114 &1925460428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1925460423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b79b5624d944058bd39aad2b90fb275, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Purchasing.Codeless::UnityEngine.Purchasing.CodelessIAPButton
+  productId: no_ads
+  buttonType: 0
+  automaticallyConfirmTransaction: 1
+  onProductFetched:
+    m_PersistentCalls:
+      m_Calls: []
+  onProductFetchFailed:
+    m_PersistentCalls:
+      m_Calls: []
+  onPurchaseFetched:
+    m_PersistentCalls:
+      m_Calls: []
+  onTransactionsRestored:
+    m_PersistentCalls:
+      m_Calls: []
+  onOrderPending:
+    m_PersistentCalls:
+      m_Calls: []
+  onOrderConfirmed:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1697093056}
+        m_TargetAssemblyTypeName: RemovedorDeAnuncios, Assembly-CSharp
+        m_MethodName: SaveCloudData
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1925460423}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onPurchaseFailed:
+    m_PersistentCalls:
+      m_Calls: []
+  onOrderDeferred:
+    m_PersistentCalls:
+      m_Calls: []
+  onPurchaseCompleteLegacy:
+    m_PersistentCalls:
+      m_Calls: []
+  onPurchaseFailedLegacy:
+    m_PersistentCalls:
+      m_Calls: []
+  button: {fileID: 1925460425}
 --- !u!1 &1968952846
 GameObject:
   m_ObjectHideFlags: 0
@@ -5490,3 +5623,4 @@ SceneRoots:
   - {fileID: 1177806358}
   - {fileID: 1553165603}
   - {fileID: 1141168991}
+  - {fileID: 1697093057}

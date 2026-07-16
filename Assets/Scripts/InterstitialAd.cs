@@ -15,6 +15,7 @@ public class InterstitialAd : MonoBehaviour
     /// É através dele que carregamos e exibimos os anúncios.
     /// </summary>
     private LevelPlayInterstitialAd interstitialAd;
+    [SerializeField] private RemovedorDeAnuncios removedorDeAnuncios;
 
     /// <summary>
     /// Chamado quando o objeto é inicializado pela primeira vez na cena.
@@ -99,6 +100,17 @@ public class InterstitialAd : MonoBehaviour
     /// </summary>
     public void LoadAd()
     {
+        if (removedorDeAnuncios == null)
+        {
+            removedorDeAnuncios = FindFirstObjectByType<RemovedorDeAnuncios>();
+        }
+
+        if (removedorDeAnuncios != null &&
+            removedorDeAnuncios.GetRemoverAnuncios())
+        {
+            return;
+        }
+
         if (interstitialAd == null)
         {
             Debug.LogWarning("[LevelPlay] Tentando carregar interstitial antes da inicialização do SDK ou criação do Ad Unit.");
@@ -116,9 +128,22 @@ public class InterstitialAd : MonoBehaviour
     /// </summary>
     public void ShowAd()
     {
+        if (removedorDeAnuncios == null)
+        {
+            removedorDeAnuncios = FindFirstObjectByType<RemovedorDeAnuncios>();
+        }
+
+        if (removedorDeAnuncios != null &&
+            removedorDeAnuncios.GetRemoverAnuncios())
+        {
+            return;
+        }
+
         if (interstitialAd == null)
         {
-            Debug.LogWarning("[LevelPlay] Tentando exibir interstitial antes da inicialização do SDK.");
+            Debug.LogWarning(
+                "[LevelPlay] Tentando exibir interstitial antes da inicialização do SDK."
+            );
             return;
         }
 
@@ -128,7 +153,9 @@ public class InterstitialAd : MonoBehaviour
         }
         else
         {
-            Debug.Log("[LevelPlay] ShowAd chamado, mas o interstitial ainda não está pronto. Considere chamar LoadAd novamente.");
+            Debug.Log(
+                "[LevelPlay] ShowAd chamado, mas o interstitial ainda não está pronto."
+            );
         }
     }
 

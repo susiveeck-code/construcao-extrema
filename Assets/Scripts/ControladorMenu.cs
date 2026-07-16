@@ -7,10 +7,10 @@ public class ControladorMenu : MonoBehaviour
 {
     [SerializeField] private GameObject botoesMenu;
     [SerializeField] private TMP_Text loadingText;
+    [SerializeField] private InterstitialAd interstitialAd;
 
     private bool carregando;
 
-    // Botão JOGAR da cena MenuInicial
     public void Jogar()
     {
         if (carregando)
@@ -18,6 +18,16 @@ public class ControladorMenu : MonoBehaviour
 
         carregando = true;
         Time.timeScale = 1;
+
+        if (interstitialAd == null)
+        {
+            interstitialAd = FindFirstObjectByType<InterstitialAd>();
+        }
+
+        if (interstitialAd != null)
+        {
+            interstitialAd.ShowAd();
+        }
 
         if (botoesMenu != null)
             botoesMenu.SetActive(false);
@@ -30,7 +40,6 @@ public class ControladorMenu : MonoBehaviour
 
         StartCoroutine(IniciarJogo());
     }
-
     private IEnumerator IniciarJogo()
     {
         // Permite que a Unity desenhe o texto antes de carregar.

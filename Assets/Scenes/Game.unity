@@ -1679,6 +1679,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 2137608139}
+        m_TargetAssemblyTypeName: RemovedorDeAnuncios, Assembly-CSharp
+        m_MethodName: LoadCloudData
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &552877372
 GameObject:
   m_ObjectHideFlags: 0
@@ -4159,6 +4171,7 @@ GameObject:
   - component: {fileID: 1655480498}
   - component: {fileID: 1655480497}
   - component: {fileID: 1655480496}
+  - component: {fileID: 1655480499}
   m_Layer: 5
   m_Name: RemoverAnunciosButton
   m_TagString: Untagged
@@ -4268,6 +4281,64 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1655480494}
   m_CullTransparentMesh: 1
+--- !u!114 &1655480499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655480494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b79b5624d944058bd39aad2b90fb275, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Purchasing.Codeless::UnityEngine.Purchasing.CodelessIAPButton
+  productId: no_ads
+  buttonType: 0
+  automaticallyConfirmTransaction: 1
+  onProductFetched:
+    m_PersistentCalls:
+      m_Calls: []
+  onProductFetchFailed:
+    m_PersistentCalls:
+      m_Calls: []
+  onPurchaseFetched:
+    m_PersistentCalls:
+      m_Calls: []
+  onTransactionsRestored:
+    m_PersistentCalls:
+      m_Calls: []
+  onOrderPending:
+    m_PersistentCalls:
+      m_Calls: []
+  onOrderConfirmed:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2137608139}
+        m_TargetAssemblyTypeName: RemovedorDeAnuncios, Assembly-CSharp
+        m_MethodName: SaveCloudData
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onPurchaseFailed:
+    m_PersistentCalls:
+      m_Calls: []
+  onOrderDeferred:
+    m_PersistentCalls:
+      m_Calls: []
+  onPurchaseCompleteLegacy:
+    m_PersistentCalls:
+      m_Calls: []
+  onPurchaseFailedLegacy:
+    m_PersistentCalls:
+      m_Calls: []
+  button: {fileID: 1655480496}
 --- !u!1 &1676819220
 GameObject:
   m_ObjectHideFlags: 0
@@ -4300,6 +4371,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ControladorMenu
   botoesMenu: {fileID: 0}
   loadingText: {fileID: 0}
+  interstitialAd: {fileID: 0}
 --- !u!4 &1676819222
 Transform:
   m_ObjectHideFlags: 0
@@ -4891,8 +4963,6 @@ MonoBehaviour:
       Input:
         InputAction: {fileID: 1278630840653054354, guid: 07e73646afde7c443a4c377e0715acb5, type: 3}
         Gain: 50
-        LegacyInput: Mouse X
-        LegacyGain: 50
         CancelDeltaTime: 0
       InputValue: 0
       Driver:
@@ -4904,8 +4974,6 @@ MonoBehaviour:
       Input:
         InputAction: {fileID: 1278630840653054354, guid: 07e73646afde7c443a4c377e0715acb5, type: 3}
         Gain: 50
-        LegacyInput: Mouse Y
-        LegacyGain: 50
         CancelDeltaTime: 0
       InputValue: 0
       Driver:
@@ -5493,6 +5561,65 @@ MonoBehaviour:
   m_DefaultActionMap: Jogador
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!1 &2137608138
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2137608140}
+  - component: {fileID: 2137608139}
+  m_Layer: 0
+  m_Name: CloudSave
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2137608139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2137608138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69901549db731d74d815a7ddf41ddd93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RemovedorDeAnuncios
+  OnRemoverAnuncios:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1655480494}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!4 &2137608140
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2137608138}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -5512,3 +5639,4 @@ SceneRoots:
   - {fileID: 1480268855}
   - {fileID: 824507801}
   - {fileID: 942808070}
+  - {fileID: 2137608140}
