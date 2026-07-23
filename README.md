@@ -6,8 +6,7 @@ Um jogo mobile desenvolvido na **Unity** utilizando **C#**, onde o objetivo é e
 
 ## 🎥 Demonstração
 
-Assista ao vídeo do projeto:
-
+▶️ Assista à demonstração do projeto:
 https://youtu.be/B7aNrHSAJr8
 
 ---
@@ -51,6 +50,7 @@ Durante o desenvolvimento, além da mecânica principal do jogo, foram implement
 ---
 
 ## 📸 Capturas de tela
+
 ### Menu Inicial
 
 ![Menu Inicial](images/menu-inicial.jpg)
@@ -89,6 +89,20 @@ Durante o desenvolvimento deste projeto aprofundei conhecimentos em:
 
 ---
 
+## 💡 Desafios encontrados
+
+Durante o desenvolvimento deste projeto foram implementadas e corrigidas diversas funcionalidades, como:
+
+• integração com Unity Gaming Services
+• autenticação anônima
+• ranking online
+• sincronização de recordes
+• sistema de anúncios
+• compras dentro do aplicativo (IAP)
+• adaptação da interface para dispositivos móveis
+
+---
+
 ## 🔮 Melhorias futuras
 
 - Novos cenários
@@ -101,6 +115,7 @@ Durante o desenvolvimento deste projeto aprofundei conhecimentos em:
 
 ## 👩‍💻 Desenvolvido por
 
-**Susi da Rosa**
+Susi da Rosa
 
-Projeto desenvolvido para estudos, aprendizado e composição de portfólio.
+Projeto desenvolvido para estudos de Unity, C#, desenvolvimento mobile e composição de portfólio.
+
