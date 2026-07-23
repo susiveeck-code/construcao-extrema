@@ -101,16 +101,16 @@ Durante o desenvolvimento deste projeto aprofundei conhecimentos em:
 
 ## 💡 Desafios encontrados
 
-Durante o desenvolvimento deste projeto foram implementadas e corrigidas diversas funcionalidades, como:
+Durante o desenvolvimento deste projeto foram implementadas e aperfeiçoadas diversas funcionalidades, como:
 
-• integração com Unity Gaming Services
-• autenticação anônima
-• ranking online
-• sincronização de recordes
-• sistema de anúncios
-• compras dentro do aplicativo (IAP)
-• adaptação da interface para dispositivos móveis
-
+- Integração com Unity Gaming Services
+- Autenticação anônima do jogador
+- Ranking online
+- Sincronização de recordes na nuvem
+- Sistema de anúncios intersticiais
+- Compras dentro do aplicativo (IAP)
+- Adaptação da interface para dispositivos móveis
+  
 ---
 
 ## 🔮 Melhorias futuras
