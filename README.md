@@ -1,5 +1,15 @@
 # 🎮 Construção Extrema
 
+![Unity](https://img.shields.io/badge/Unity-2022-black?logo=unity)
+![C#](https://img.shields.io/badge/C%23-.NET-512BD4?logo=csharp)
+![Mobile](https://img.shields.io/badge/Platform-Android-3DDC84?logo=android)
+![Unity Gaming Services](https://img.shields.io/badge/Unity_Gaming_Services-Enabled-000000)
+![Cloud Save](https://img.shields.io/badge/Cloud_Save-Enabled-0099FF)
+![Leaderboard](https://img.shields.io/badge/Leaderboard-Online-success)
+![IAP](https://img.shields.io/badge/In--App_Purchase-IAP-orange)
+![Git](https://img.shields.io/badge/Git-F05032?logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?logo=github)
+
 Um jogo mobile desenvolvido na **Unity** utilizando **C#**, onde o objetivo é empilhar blocos para construir a torre mais alta possível sem deixar as peças caírem na água.
 
 ---
