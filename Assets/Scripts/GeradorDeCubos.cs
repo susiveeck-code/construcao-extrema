@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -43,10 +42,7 @@ public class GeradorDeCubos : MonoBehaviour
 
         // Redefine o tamanho do cubo gerado
         ultimoCuboGerado.transform.localScale = new Vector3(tamanhoX, tamanhoY, tamanhoZ);
-
-        // Troca o cubo de cor de forma aleatória
-        //ultimoCuboGerado.GetComponent<MeshRenderer>().material.color = Random.ColorHSV(); // Cores feias
-
+             
         Color[] cores =
         {
             Color.red,

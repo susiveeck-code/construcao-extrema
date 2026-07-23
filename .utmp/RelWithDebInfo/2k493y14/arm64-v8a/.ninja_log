@@ -1,10 +1,19 @@
 # ninja log v5
 54	4265	8056850843357640	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	35c42bee94664d96
 103	4307	8056850843337678	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	8f5e1a0d11857330
-1	4316	8056850843686775	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	772a556c512ce37c
-157	4331	8056850844190559	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	85fa38b720d7a226
-19	4440	8056850845378173	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	1a5d3dc48f72cc63
 125	4717	8056850848156968	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	7529b298453c4f5c
+1	4316	8056850843686775	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	772a556c512ce37c
+19	4440	8056850845378173	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	1a5d3dc48f72cc63
+157	4331	8056850844190559	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	85fa38b720d7a226
+5176	5593	8056850856875170	C:/Users/User/Desktop/Jogos Unity/ConstrucaoExtrema/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/2k493y14/obj/arm64-v8a/libgame.so	dbed0cba2b78db54
 78	4906	8056850850044416	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	18efe13e809a5f82
 35	5175	8056850852721550	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	fe0ac609a07c933f
-5176	5593	8056850856875170	C:/Users/User/Desktop/Jogos Unity/ConstrucaoExtrema/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/2k493y14/obj/arm64-v8a/libgame.so	dbed0cba2b78db54
+494	7627	8062736986388978	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	8f5e1a0d11857330
+189	7637	8062736986349095	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	35c42bee94664d96
+163	7701	8062736986887630	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	772a556c512ce37c
+314	7967	8062736987625667	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	85fa38b720d7a226
+62	8146	8062736991221281	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	1a5d3dc48f72cc63
+621	8960	8062736999985786	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	7529b298453c4f5c
+249	9088	8062737001062903	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	18efe13e809a5f82
+121	9456	8062737004757428	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	fe0ac609a07c933f
+9457	10405	8062737014856775	C:/Users/User/Desktop/Jogos Unity/ConstrucaoExtrema/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/2k493y14/obj/arm64-v8a/libgame.so	dbed0cba2b78db54

@@ -35,6 +35,7 @@ public class CloudServices : MonoBehaviour
 
     private Task tarefaInicializacao;
     private bool servicosProntos = false;
+    private bool tentandoLogin = false;
 
     private void Awake()
     {
@@ -52,6 +53,7 @@ public class CloudServices : MonoBehaviour
 
     private async Task InicializarELogar()
     {
+        servicosProntos = false;
         try
         {
             if (UnityServices.State != ServicesInitializationState.Initialized)
@@ -82,8 +84,18 @@ public class CloudServices : MonoBehaviour
             servicosProntos = true;
             Debug.Log("CloudServices pronto para usar Leaderboards.");
         }
+        //catch (Exception ex)
+        //{
+        //    Debug.LogException(ex);
+
+        //    if (erroLoginPopup != null)
+        //        erroLoginPopup.SetActive(true);
+        //}
         catch (Exception ex)
         {
+            servicosProntos = false;
+
+            Debug.LogError($"Falha ao inicializar os serviços da Unity: {ex.Message}");
             Debug.LogException(ex);
 
             if (erroLoginPopup != null)
@@ -91,42 +103,81 @@ public class CloudServices : MonoBehaviour
         }
     }
 
+    //private async Task GarantirPronto()
+    //{
+    //    if (tarefaInicializacao != null)
+    //    {
+    //        await tarefaInicializacao;
+    //    }
+
+    //    if (UnityServices.State != ServicesInitializationState.Initialized)
+    //    {
+    //        await UnityServices.InitializeAsync();
+    //    }
+
+    //    if (!AuthenticationService.Instance.IsSignedIn)
+    //    {
+    //        await AuthenticationService.Instance.SignInAnonymouslyAsync();
+    //    }
+
+    //    while (!servicosProntos)
+    //    {
+    //        await Task.Delay(100);
+    //    }
+
+    //}
+
     private async Task GarantirPronto()
     {
+        if (servicosProntos)
+            return;
+
         if (tarefaInicializacao != null)
         {
             await tarefaInicializacao;
         }
 
-        if (UnityServices.State != ServicesInitializationState.Initialized)
+        if (!servicosProntos)
         {
-            await UnityServices.InitializeAsync();
+            throw new InvalidOperationException(
+                "Os serviços da Unity não foram inicializados corretamente."
+            );
         }
-
-        if (!AuthenticationService.Instance.IsSignedIn)
-        {
-            await AuthenticationService.Instance.SignInAnonymouslyAsync();
-        }
-
-        while (!servicosProntos)
-        {
-            await Task.Delay(100);
-        }
-
     }
-
     public async Task SignInAnonymouslyAsync()
     {
         await GarantirPronto();
     }
 
+    //public async void TentarLoginNovamente()
+    //{
+    //    if (erroLoginPopup != null)
+    //        erroLoginPopup.SetActive(false);
+
+    //    tarefaInicializacao = InicializarELogar();
+    //    await tarefaInicializacao;
+    //}
     public async void TentarLoginNovamente()
     {
+        if (tentandoLogin)
+            return;
+
+        tentandoLogin = true;
+
         if (erroLoginPopup != null)
             erroLoginPopup.SetActive(false);
 
-        tarefaInicializacao = InicializarELogar();
-        await tarefaInicializacao;
+        servicosProntos = false;
+
+        try
+        {
+            tarefaInicializacao = InicializarELogar();
+            await tarefaInicializacao;
+        }
+        finally
+        {
+            tentandoLogin = false;
+        }
     }
 
     public async Task AtualizarUserName(string username)
